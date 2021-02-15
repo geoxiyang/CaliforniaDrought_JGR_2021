@@ -1,4 +1,4 @@
-# CaliforniaDrought_JGR_2020
+# CaliforniaDrought_JGR_2021
 Source code for the JGR paper:
 
 Recovery: Fast and Slow - vegetation response during the 2012-2016 California Drought.
