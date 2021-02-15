@@ -40,8 +40,9 @@ for ii = 1:ceil(length(lon)/100)
         EVI                     = permute(EVI_tmp,[2,1,3]);
         LC                      = permute(LC,[2,1,3]);
         doy                     = permute(doy,[2,1,3]);
-
-        save(['/Volumes/XiYangBackUp/Projects/6.CalDrought/subsets/CalEVI_2000_2019_500m_Subset_' num2str(ii) '_' num2str(jj) '.mat'],'-v7.3'); %,'latroi','lonroi','-append','-v7.3'
+        
+        % Note that for other use the file path on your computer
+        save(['/Volumes/XiYangBackUp/Projects/6.CalDrought/subsets/CalEVI_2000_2019_500m_Subset_' num2str(ii) '_' num2str(jj) '.mat'], '-v7.3'); 
         
     end
 end

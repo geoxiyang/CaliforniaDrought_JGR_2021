@@ -125,13 +125,6 @@ Tmano            = nan(length(modlon),length(modlat));
 VPDano           = nan(length(modlon),length(modlat));
 EVIbp            = nan(length(modlon),length(modlat));
 EVIbp_ano        = nan(length(modlon),length(modlat));
-% cwdbp            = nan(length(modlon),length(modlat));
-% cuwdbp           = nan(length(modlon),length(modlat));
-% cuwdbp2          = nan(length(modlon),length(modlat));
-% cuwdbp3          = nan(length(modlon),length(modlat));
-% cuwdbp4          = nan(length(modlon),length(modlat));
-% cuwdbp5          = nan(length(modlon),length(modlat));
-% cuwdbp6          = nan(length(modlon),length(modlat));
 
 PPTano_2412      = nan(length(modlon),length(modlat));
 Tano_2412        = nan(length(modlon),length(modlat));
@@ -148,32 +141,15 @@ VPDano_0011      = nan(length(modlon),length(modlat));
 PPTano_1201      = nan(length(modlon),length(modlat));
 Tano_1201        = nan(length(modlon),length(modlat));
 VPDano_1201      = nan(length(modlon),length(modlat));
-
-% SPEI12_BP        = nan(length(modlon),length(modlat));
-% SPEI12_WINDOW    = nan(length(modlon),length(modlat));
-% SPEI2412_BP      = nan(length(modlon),length(modlat));
-% SPEI0012_BP      = nan(length(modlon),length(modlat));
-% 
-% SPEI06_BP        = nan(length(modlon),length(modlat));
-% SPEI06_WINDOW    = nan(length(modlon),length(modlat));
-% SPEI06_2412_BP   = nan(length(modlon),length(modlat));
-% SPEI06_0012_BP   = nan(length(modlon),length(modlat));
-
-% cwdvalue         = cwddata.cwdregrid;
-% cwdyear          = cwddata.yearnumber;
-% cwdmonth         = cwddata.monthnumber;
 PPTannual        = nan(length(modlon),length(modlat));
 Tannual          = nan(length(modlon),length(modlat));
 VPDannual        = nan(length(modlon),length(modlat));
 PPTano_duringBP  = nan(length(modlon),length(modlat));
 Tano_duringBP    = nan(length(modlon),length(modlat));
 VPDano_duringBP  = nan(length(modlon),length(modlat));
-%cwd_duringdrought= nan(length(modlon),length(modlat));
 PPTlt            = nan(length(modlon),length(modlat)); 
 Tmlt             = nan(length(modlon),length(modlat)); 
 VPDlt            = nan(length(modlon),length(modlat));
-%CWDlt            = nan(length(modlon),length(modlat)); 
-%cwdannmean       = nan(length(modlon),length(modlat),6);
 
 PPTano_duringBP2  = nan(length(modlon),length(modlat));
 Tano_duringBP2    = nan(length(modlon),length(modlat));
@@ -206,7 +182,6 @@ Tmp_pre_ano       = nan(length(modlon),length(modlat));
 VPD_pre_ano       = nan(length(modlon),length(modlat));
 
 timelags = [1,3,6,12,24];
-%timelags = [-12]; %-1,-3,-6,-12,
 pcor_all = nan(7,25);
 for i_lags = 4:4
     
@@ -247,14 +222,9 @@ for i_lags = 4:4
                 if timelag > 0
                     bp_mon1 = unique(mod(((12+bp_mon-timelag):(12+bp_mon-1))-1,12))+1;
                     indx    = (time_index-timelag):(time_index-1);
-%                    indx2   = (cwd_t_index-timelag):(cwd_t_index-1);
-%                    indx2   = indx2(indx2>0);
-%                    indx22  = (cwd_t_index-timelag):(cwd_t_index);
-%                    indx22  = indx22(indx22>0);
                 else
                     bp_mon1 = unique(mod(((12+bp_mon):(12+bp_mon-timelag))-1,12))+1;
                     indx    = time_index:(time_index-timelag);
-%                    indx2   = cwd_t_index:(cwd_t_index-timelag);
                 end
 
                 for kk = 1:11
@@ -289,30 +259,6 @@ for i_lags = 4:4
                 PPT_pre_ano(ii,jj)    = mean(PPTann_ano(ii,jj,(bp_year-1999-1):(bp_year-1999)));
                 Tmp_pre_ano(ii,jj)    = mean(Tmann_ano(ii,jj,(bp_year-1999-1):(bp_year-1999)));
                 VPD_pre_ano(ii,jj)    = mean(VPDann_ano(ii,jj,(bp_year-1999-1):(bp_year-1999)));
-%                cwdbp(ii,jj)  = nanmean(cwdvalue(ii,jj,indx2));
-                
- %              WDi           = nan(length(indx22)-1,1);
-%               WDi(1,1)      = nanmin(WD(ii,jj,indx22(1)),0);
-%                for cwd_ii = 2:((length(indx22)))
-%                    WDi(cwd_ii,1) = nanmin(WD(ii,jj,indx22(cwd_ii)) + WDi(cwd_ii-1,1),0);
-%                end
-%                cuwdbp(ii,jj) = WDi(length(indx22)-3,1);
-%                cuwdbp2(ii,jj) = WDi(length(indx22)-6,1);
-%                cuwdbp3(ii,jj) = WDi(length(indx22)-9,1);
-%                cuwdbp4(ii,jj) = WDi(length(indx22),1);
-%                if sum((length(indx22)-12)<0) >0 
-%                    cuwdbp5(ii,jj) = NaN;
-%                else
-%                    cuwdbp5(ii,jj) = WDi(length(indx22)-12,1);
-%                end
-%                
-%                if sum((length(indx22)-23)<0) >0 
-%                    cuwdbp6(ii,jj) = NaN;
-%                else
-%                    cuwdbp6(ii,jj) = WDi(1,1);
-%                end
-%                
-%                cwd_duringdrought(ii,jj) = nanmean(cwdvalue(ii,jj,cwdyear==bp_year));
                 
                 uniqyears   = unique(yearnumber);
                 
@@ -425,48 +371,11 @@ for i_lags = 4:4
                 
                 PPTano_1201(ii,jj)     = (nanmean(pptregrid(ii,jj,indx10)) - nanmean(PPTseasonmean(ii,jj,bp_mon9)))/nanstd(PPTtmp9,0,2);
                 Tano_1201(ii,jj)       = (nanmean(tmeanregrid(ii,jj,indx10)) - nanmean(Tmseasonmean(ii,jj,bp_mon9)))/nanstd(Tmtmp9,0,2);
-                VPDano_1201(ii,jj)     = (nanmean(vpdregrid(ii,jj,indx10)) - nanmean(VPDseasonmean(ii,jj,bp_mon9)))/nanstd(VPDtmp9,0,2); 
-
-                
-   
-%                 % SPEI12 at the time of BP
-%                 %spei12_ind             = knnsearch(time_spei,bp_tmp,'K',1);
-%                 %SPEI12_BP(ii,jj)       = spei12regrid(ii,jj,spei12_ind);
-%                 spei12_ind             = (spei12year == bp_year) & (spei12mon == bp_mon);
-%                 SPEI12_BP(ii,jj)       = spei12(ii,jj,spei12_ind);
-%                 SPEI12_WINDOW(ii,jj)   = nanmean(spei12(ii,jj,(find(spei12_ind)-11):(find(spei12_ind))));
-%                 SPEI2412_BP(ii,jj)     = nanmean(spei12(ii,jj,(find(spei12_ind)-23):(find(spei12_ind)-11)));
-%                 if find(spei12_ind)+12 > 202
-%                     SPEI0012_BP(ii,jj)     = NaN;
-%                     SPEI06_0012_BP(ii,jj)  = NaN;
-%                 else
-%                     SPEI0012_BP(ii,jj)     = nanmean(spei12(ii,jj,(find(spei12_ind)):(find(spei12_ind)+11)));
-%                     SPEI06_0012_BP(ii,jj)  = nanmean(spei06(ii,jj,(find(spei12_ind)):(find(spei12_ind)+11)));
-%                 end
-%                 
-%                 SPEI06_BP(ii,jj)       = spei06(ii,jj,spei12_ind);
-%                 SPEI06_WINDOW(ii,jj)   = nanmean(spei06(ii,jj,(find(spei12_ind)-11):(find(spei12_ind))));
-%                 SPEI06_2412_BP(ii,jj)  = nanmean(spei06(ii,jj,(find(spei12_ind)-23):(find(spei12_ind)-11)));                
+                VPDano_1201(ii,jj)     = (nanmean(vpdregrid(ii,jj,indx10)) - nanmean(VPDseasonmean(ii,jj,bp_mon9)))/nanstd(VPDtmp9,0,2);          
                 
             end
         end 
-    end
-
-%     PPTano(PPTano<-5 | PPTano >5)   = NaN;
-%     Tmano(Tmano<-5 | Tmano >5)      = NaN;
-%     VPDano(VPDano<-5 | VPDano >5)   = NaN;
-% 
-%     usamap('California')
-%     h2                  = geoshow(calboundary,'DisplayType','polygon','FaceAlpha',0);   
-%     h1                  = pcolorm(latroi,lonroi,rel_mag1);
-%     caxis([-1.5, 1.5])
-%     uistack(h1,'bottom')
-%     colormap(brewermap([],'RdBu'))
-%     %colormap(flipud(brewermap([],'RdBu')))
-%     colorbar
-%         
-%     print('/Volumes/XiYangBackUp/Projects/6.CalDrought/SPEI12_BP_newcalculation_BP.png',gcf,'-dpng')
-%     close(gcf)     
+    end   
 
     
     %% 5. Partial regression between BFAST results and PRISM variables
@@ -528,22 +437,7 @@ for i_lags = 4:4
     %colormap(flipud(brewermap([],'RdBu')))
     colorbar 
     
-    
-%     %wtdregrid(~(nobp==1))=NaN;
-%     
-%     lc_type    = [[1,1];[6,7];[8,9];[10,10]];
-%     
-%     for lc_i   = 1:5
-%         if lc_i == 1
-%             [pcor,sig] = partialcorr([relmag1(:),PPTano(:),Tmano(:),VPDano(:),cwdbp(:),wtdregrid(:),EVIbp(:),EVIltmean(:)],'Rows','complete');
-%         else
-%             subsample  = LC1'==lc_type(lc_i-1,1)| LC1'==lc_type(lc_i-1,2);
-%             [pcor,sig] = partialcorr([relmag1(subsample),PPTano(subsample),Tmano(subsample),VPDano(subsample),cwdbp(subsample),wtdregrid(subsample),EVIbp(subsample),EVIltmean(subsample)],'Rows','complete');
-%         end
-%         pcor_all(:,(lc_i-1)*5+i_lags) = pcor(2:8,1);
-%     end
-    %[pcor,sig] = partialcorr([slope11(:),PPTano(:),Tmano(:),VPDano(:),wtdregrid(:)],'Rows','complete')
-    
+
     
     %% 6. Stepwise regression
     LC11        = LC1';
@@ -554,7 +448,6 @@ for i_lags = 4:4
                     & (total_relpercent1(:)>-5 & total_relpercent1(:)<5); 
             
     EVIdeviation = PPTano2016; % just put a placeholder here for EVIdeviation.
-    % SPEI12_BP(:),SPEI12_WINDOW(:),SPEI2412_BP(:),SPEI0012_BP(:),SPEI06_BP(:),SPEI06_WINDOW(:),SPEI06_2412_BP(:),SPEI06_0012_BP(:),,cuwdbp(:),cwd_duringdrought(:)
     XX          = [PPTano(:),Tmano(:),VPDano(:),PPTano_duringBP(:),Tano_duringBP(:),VPDano_duringBP(:),PPTano_duringBP3(:),Tano_duringBP3(:),VPDano_duringBP3(:),PPTano_duringBP4(:),Tano_duringBP4(:),VPDano_duringBP4(:),...
                     EVIbp_ano(:),double(LC11(:)),wtdregrid(:),EVIbp(:),EVIltmean(:),sawcregrid(:),sawcregrid200(:),demregrid(:),...
                     PPTlt(:),Tmlt(:),VPDlt(:),soilthickness(:), Tmseasonmin1(:),PPTano_duringBP2(:),Tano_duringBP2(:),VPDano_duringBP2(:),...
@@ -564,7 +457,6 @@ for i_lags = 4:4
                     PPT_bp_3yr_dif(:),Tmp_bp_3yr_dif(:),VPD_bp_3yr_dif(:),PPT_post_trend(:),Tmp_post_trend(:),VPD_post_trend(:), ...
                     PPT_pre_ano(:),Tmp_pre_ano(:),VPD_pre_ano(:),PPT_post_trend_1(:),Tmp_post_trend_1(:),VPD_post_trend_1(:)]; 
     YY          = relmag1(:);
-    %All2 = [XX(nonnanidx,:),double(LC11(nonnanidx)),YY(nonnanidx)];
 
     All         = [XX(nonnanidx,:),YY(nonnanidx),slope11(nonnanidx),slope1_relpercent1(nonnanidx),slope2_relpercent1(nonnanidx), ...
                     double(doy(BP11(nonnanidx)+228) + datenum(2000,1,1)),double(doy(BP22(nonnanidx)+228) + datenum(2000,1,1)),bprange1(nonnanidx),nobp1(nonnanidx),total_relpercent1(nonnanidx), ...
